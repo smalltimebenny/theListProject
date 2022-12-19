@@ -3,16 +3,13 @@ import {useState, useNavigate} from "react"
 import AddForm from "./components/AddForm"
 import BasicList from "./components/BasicList"
 import './App.css';
-import PersonalList from "./components/PersonalList";
 
 function App() {
-  const [masterList, setMasterList] =useState([])
-  const [listOfLists, setListOfLists] =useState([])
 
   return (
     <div>
-      <BasicList listOfLists={listOfLists} setListOfLists={setListOfLists} masterList={masterList} setMasterList={setMasterList} />
-      <AddForm listOfLists={listOfLists} setListOfLists={setListOfLists} masterList={masterList} setMasterList={setMasterList} />
+      <AddForm />
+      <BasicList />
       {/* <PersonalList /> */}
       {/* <BrowserRouter>
         <Routes>
