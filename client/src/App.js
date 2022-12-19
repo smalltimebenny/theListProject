@@ -7,11 +7,13 @@ import PersonalList from "./components/PersonalList";
 
 function App() {
   const [masterList, setMasterList] =useState([])
+  const [listOfLists, setListOfLists] =useState([])
+
   return (
     <div>
-      <BasicList />
-      <AddForm />
-      <PersonalList />
+      <BasicList listOfLists={listOfLists} setListOfLists={setListOfLists} masterList={masterList} setMasterList={setMasterList} />
+      <AddForm listOfLists={listOfLists} setListOfLists={setListOfLists} masterList={masterList} setMasterList={setMasterList} />
+      {/* <PersonalList /> */}
       {/* <BrowserRouter>
         <Routes>
           <Route element={<AddForm masterList={masterList} setMasterList={setMasterList} />} path="/1" />

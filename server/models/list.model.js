@@ -1,1 +1,8 @@
-// can just be handled in components?
+import mongoose from "mongoose"
+
+const ListSchema = mongoose.Schema({
+    allLists:{type:Array}
+}, {timestamps:true})
+
+const List = mongoose.model("List", ListSchema);
+module.exports = List;
