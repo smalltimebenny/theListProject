@@ -3,7 +3,10 @@ import {useState, useNavigate} from "react"
 import AddForm from "./components/AddForm"
 import BasicList from "./components/BasicList"
 import './App.css';
-
+//button to call multiple basic lists
+//figure out ranking and make leaderboards
+//registration and login functioanlity
+//users to upvote/boost items already on a main list
 function App() {
 
   return (

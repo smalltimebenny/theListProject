@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import axios from "axios"
-
+//add in optional inputs for all fields
+//make a button to add to multiple lists eventually
 const AddForm = (props) => {
     const [rank, setRank] =useState("")
     const [name, setName] =useState("")
@@ -46,7 +47,6 @@ const AddForm = (props) => {
         if(lists==="Books"){setVarKey("Author")}
     }
 console.log(varKey)
-//make a button to add to multiple lists eventually
   return (
     <div>
         <h1>New Entry</h1>

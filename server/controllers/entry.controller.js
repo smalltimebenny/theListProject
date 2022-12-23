@@ -1,4 +1,3 @@
-const { restart } = require("nodemon")
 const Entry = require("../models/entry.model")
 
 module.exports = {
@@ -10,8 +9,11 @@ module.exports = {
             res.status(400).json(err)})
     },
     findEntriesByList:(req, res)=> {
-        Entry.find({lists:{$in:req.body}})
-        .then(entries=>res.json(entries))
+        // Entry.find({lists:{$in:[req.body]}})
+        Entry.find({lists:[req.params.listName]})
+        .then(entries=>{
+            // console.log(entries)
+            res.json(entries)})
         .catch(err=>{
             console.log("Find Entries By List error.")
             res.status(400).json(err)})

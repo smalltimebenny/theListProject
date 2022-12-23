@@ -1,14 +1,23 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
 const EntrySchema = mongoose.Schema({
     rank: {type:Number},
     name:{type:String,
         required:[true, "Must have an entry!"],
-        minLength:[1, "Must be at least one (1) character long."]},
-    value:0.5,
-    lists:{type:Array,
-        required:[true, "Must belong to at least one list!"]}
-},{timestamps:true});
+        minLength:[2, "Must be at least one (1) character long."]},
+    value:{type:Number},
+    lists:{type:String,
+        required:[true, "Must pick from the list!"],
+    enum: [
+        "Books",
+        "Board Games",
+        "Video Games",
+        "Movies",
+        "TV Shows",
+        "Movies",
+        "Songs",
+    ]}
+},{timestamps:true, strict:false});
 
 const Entry = mongoose.model("Entry", EntrySchema);
 module.exports=Entry;
