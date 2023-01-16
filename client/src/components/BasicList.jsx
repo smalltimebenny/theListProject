@@ -44,12 +44,13 @@ const BasicList = (props) => {
         <select onChange={(e)=>setFind(e.target.value)}>
           <option>Pick a List Category</option>
           <option value="Books">Books</option>
-              <option value="Board Games">Board Games</option>
-              <option value="Video Games">Video Games</option>
-              <option value="Movies">Movies</option>
-              <option value="TV Shows">TV Shows</option>
-              <option value="Albums">Albums</option>
-              <option value="Songs">Songs</option>
+          <option value="Movies">Movies</option>
+          <option value="Music">Music</option>
+          {/* <option value="Board Games">Board Games</option> */}
+          {/* <option value="Video Games">Video Games</option> */}
+          {/* <option value="TV Shows">TV Shows</option>
+          <option value="Albums">Albums</option>
+          <option value="Songs">Songs</option> */}
         </select>
         <input type="submit" value="Get List" />
       </form>
@@ -60,12 +61,13 @@ const BasicList = (props) => {
           let entryVar
           entry.rank? rankDisplay=entry.rank:rankDisplay="-"
           if(entry.lists=="Books"){entryVar=<span>{entry.Author}</span>}
-            else if(entry.lists=="Board Games"){entryVar=<span>Board Games</span>}
-            else if(entry.lists=="Video Games"){entryVar=<span>Video</span>}
             else if(entry.lists=="Movies"){entryVar=<span>Movies</span>}
-            else if(entry.lists=="TV Shows"){entryVar=<span>TV</span>}
-            else if(entry.lists=="Albums"){entryVar=<span>Albums</span>}
-            else if(entry.lists=="Songs"){entryVar=<span>Songs</span>}
+            else if(entry.lists=="Music"){entryVar=<span>Musci</span>}
+            // else if(entry.lists=="Board Games"){entryVar=<span>Board Games</span>}
+            // else if(entry.lists=="Video Games"){entryVar=<span>Video</span>}
+            // else if(entry.lists=="TV Shows"){entryVar=<span>TV</span>}
+            // else if(entry.lists=="Albums"){entryVar=<span>Albums</span>}
+            // else if(entry.lists=="Songs"){entryVar=<span>Songs</span>}
           return(
             <div key={_id}>
               {rankDisplay} | {entry.name} | {entryVar} | <button onClick={()=>deleteEntry(entry._id)}>Delete Entry</button>

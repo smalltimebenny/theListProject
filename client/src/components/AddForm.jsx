@@ -68,18 +68,30 @@ console.log(varKey)
             <select onChange={(e)=>listChange(e.target.value)}>
                 <option value="null" >Pick a List</option>
                 <option value="Books">Books</option>
-                <option value="Board Games">Board Games</option>
-                <option value="Video Games">Video Games</option>
                 <option value="Movies">Movies</option>
-                <option value="TV Shows">TV Shows</option>
+                <option value="Music">Music</option>
+                {/* <option value="Board Games">Board Games</option>
+                <option value="Video Games">Video Games</option> */}
+                {/* <option value="TV Shows">TV Shows</option>
                 <option value="Movies">Albums</option>
-                <option value="Songs">Songs</option>
+                <option value="Songs">Songs</option> */}
             </select>
             {errors.lists && <span>{errors.lists.message}</span>}
             {lists=="Books" && <span>
                 <br /><label>Author:</label>
                 <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
-                </span>}
+                </span>
+            }
+            {lists=="Movies" && <span>
+                <br /><label>Release Year:</label>
+                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                </span>
+            }
+            {lists=="Music" && <span>
+                <br /><label>Artist:</label>
+                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                </span>
+            }
             <input type="submit" value="Add entry" />
         </form>
     </div>
