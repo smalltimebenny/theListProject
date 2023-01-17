@@ -10,12 +10,8 @@ const EntrySchema = mongoose.Schema({
         required:[true, "Must pick from the list!"],
     enum: [
         "Books",
-        "Board Games",
-        "Video Games",
         "Movies",
-        "TV Shows",
-        "Movies",
-        "Songs",
+        "Music",
     ]}
 },{timestamps:true, strict:false});
 

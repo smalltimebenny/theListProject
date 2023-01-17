@@ -8,13 +8,13 @@ const BasicList = (props) => {
 
     const handleChange = (e) =>{
       e.preventDefault()
-      axios.get("http://localhost:8000/api/getEntriesByList/" +find)
+      axios.get("http://localhost:8000/api/getEntriesByList/" +find,{withCredentials:true})
         .then(res=>{
           console.log("getlist worked",res.data)
           setList(res.data)
         })
         .catch(err=>{
-          console.log("Error with list funtion.", err)
+          console.log("Error with list function.", err)
         })
     }
 
