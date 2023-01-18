@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
+    const {authToken, setAuthToken} =props;
+    const {currentUser, setCurrentUser} =props;
     const [listerName, setListerName] =useState("")
     const [email, setEmail] =useState("")
     const [password, setPassword] =useState("")
@@ -21,9 +23,24 @@ const RegisterForm = () => {
         }, {withCredentials:true, credentials:"include"})
         .then((res)=>{
             console.log(res)
+            setAuthToken(true)
             navigate("/mainLists")
+            setCurrentUser({
+                _id:null,
+                listerName,
+                email,
+            })
         }).catch(err=>{
             console.log("Error with Lister submit function.", err)
+        })
+    }
+
+    const getListerInfo = (email) => {
+        axios.get("http://localhost:8000/api/lister/findOne", {email},{withCredentials:true, credentials:"include"})
+        .then(res => res.json(res))
+        .catch(err =>{
+            console.log("Couldn't grab new Lister(attempt at registration)", err)
+            
         })
     }
 

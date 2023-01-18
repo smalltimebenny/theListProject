@@ -1,5 +1,6 @@
-import {useState} from 'react'
-import axios from "axios"
+import React, {useState, useEffect} from 'react'
+import { useNavigate, Link, useParams, NavLink } from 'react-router-dom'
+import axios from 'axios'
 //add in optional inputs for all fields
 //make a button to add to multiple lists eventually
 const AddForm = (props) => {
@@ -7,9 +8,11 @@ const AddForm = (props) => {
     const [name, setName] =useState("")
     const [value, setValue] =useState(0.5)
     const [lists, setLists] =useState("")
-    const [varKey, setVarKey] =useState("")
+    const [varKey, setVarKey] =useState("Author")
     const [varVal, setVarVal] =useState("")
-
+    const [listerAdded, setListerAdded] =useState("")
+    const {authToken, setAuthToken} =props
+    const {currentUser, setCurrentUser} =props
     const [errors, setErrors] =useState({})
 
     const entryAdd = (e) =>{
@@ -20,6 +23,7 @@ const AddForm = (props) => {
             value,
             lists,
             [varKey]:varVal,
+            listerAdded: currentUser.listerName,
         })
         .then(res=>{
             console.log(res)
@@ -28,7 +32,7 @@ const AddForm = (props) => {
             console.log("Error with entry submit function.")
             setErrors(err.response.data.errors)
         })
-        console.log(lists)
+        // console.log(lists)
     }
 
     const handleRank = (e) => {
@@ -44,10 +48,16 @@ const AddForm = (props) => {
 
     const listChange = (e) => {
         setLists(e)
-        if(lists==="Books"){setVarKey("Author")}
+        if(e==="Books"){
+            setVarKey("Author")
+        }else if(e==="Movies"){
+            setVarKey("ReleaseYear")
+        }else if (e==="Music"){
+            setVarKey("Artist")
+        }else(setVarKey(""))
     }
-console.log(varKey)
-  return (
+
+    return (
     <div>
         <h1>New Entry</h1>
         <form onSubmit={entryAdd}>
@@ -92,6 +102,7 @@ console.log(varKey)
                 <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
+            <input type="hidden" value={currentUser.listerName} />
             <input type="submit" value="Add entry" />
         </form>
     </div>

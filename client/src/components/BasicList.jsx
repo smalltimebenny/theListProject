@@ -1,10 +1,12 @@
-import {useState, useEffect} from 'react'
-import axios from "axios"
-import {useParams, Link} from "react-router-dom"
+import React, {useState, useEffect} from 'react'
+import { useNavigate, Link, useParams, NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 const BasicList = (props) => {
     const [list, setList] =useState([])
     const [find, setFind] =useState("")
+    const {authToken, setAuthToken} =props
+    const {currentUSer, setCurrentUser} =props
 
     const handleChange = (e) =>{
       e.preventDefault()
