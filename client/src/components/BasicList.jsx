@@ -5,8 +5,16 @@ import axios from 'axios'
 const BasicList = (props) => {
     const [list, setList] =useState([])
     const [find, setFind] =useState("")
-    const {authToken, setAuthToken} =props
-    const {currentUSer, setCurrentUser} =props
+    const {currentUser, setCurrentUser} =props
+    const navigate = useNavigate()
+
+    useEffect(
+      ()=>{
+        if(!currentUser){
+          navigate("/logRegPage")
+        }
+      }
+    )
 
     const handleChange = (e) =>{
       e.preventDefault()

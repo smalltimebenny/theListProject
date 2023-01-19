@@ -11,7 +11,6 @@ const AddForm = (props) => {
     const [varKey, setVarKey] =useState("Author")
     const [varVal, setVarVal] =useState("")
     const [listerAdded, setListerAdded] =useState("")
-    const {authToken, setAuthToken} =props
     const {currentUser, setCurrentUser} =props
     const [errors, setErrors] =useState({})
 
@@ -59,7 +58,6 @@ const AddForm = (props) => {
 
     return (
     <div>
-        <h1>New Entry</h1>
         <form onSubmit={entryAdd}>
             <label>Rank:</label>
             <select onChange={handleRank}>

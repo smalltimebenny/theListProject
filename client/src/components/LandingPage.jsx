@@ -7,7 +7,6 @@ const LandingPage = (props) => {
     const [movies, setMovies] =useState([])
     const [musics, setMusics] =useState([])
 
-    const {authToken, setAuthToken} =props
     const {currentUSer, setCurrentUser} =props
 
     useEffect(()=>{
@@ -60,7 +59,6 @@ const LandingPage = (props) => {
 
     return (
     <div>
-        <button onClick={logBooks}>Books</button>
         <div>
             <div>
                 <h2>Books</h2>

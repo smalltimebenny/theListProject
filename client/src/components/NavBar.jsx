@@ -3,15 +3,13 @@ import { useNavigate, NavLink } from 'react-router-dom'
 import LogoutButton from './LogoutButton'
 
 const NavBar = (props) => {
-  const {authToken, setAuthToken} =props
-  const {currentUSer, setCurrentUser} =props
-    const navigate = useNavigate()
+  const {currentUser, setCurrentUser} =props
   return (
     <div>
         <h1>THE LIST</h1>
-        <NavLink to="/mainLists">Dashboard</NavLink>
-        <NavLink to="/register">Login/Register</NavLink>
-        <LogoutButton />
+        <NavLink to="/dashboard">Dashboard</NavLink>
+        <NavLink to="/logRegPage">Login/Register</NavLink>
+        <LogoutButton setCurrentUser={setCurrentUser} currentUser={currentUser} />
         <hr></hr>
     </div>
   )

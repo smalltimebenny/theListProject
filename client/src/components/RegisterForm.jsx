@@ -2,8 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const RegisterForm = (props) => {
-    const {authToken, setAuthToken} =props;
+const RegisterForm = (props) => {      
     const {currentUser, setCurrentUser} =props;
     const [listerName, setListerName] =useState("")
     const [email, setEmail] =useState("")
@@ -12,6 +11,23 @@ const RegisterForm = (props) => {
 
     const [errors, setErrors] =useState({})
     const navigate = useNavigate()
+
+    const autoLogin = (email, password) => {
+        axios.post("http://localhost:8000/api/loginLister", {
+            email,
+            password
+        }, {withCredentials:true, credentials:"include"})
+            .then(res=>{
+                console.log("Successfully logged in after registration.", res)
+                setCurrentUser({
+                    _id:res.data.lister._id,
+                    listerName:res.data.lister.listerName,
+                    email:res.data.lister.email})
+                    navigate("/")
+            }).catch(err=>{
+                console.log("Autologin error.", err)
+            })
+    }
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -23,12 +39,14 @@ const RegisterForm = (props) => {
         }, {withCredentials:true, credentials:"include"})
         .then((res)=>{
             console.log(res)
-            setAuthToken(true)
-            navigate("/mainLists")
+            autoLogin(email, password)
+            navigate("/")
         }).catch(err=>{
             console.log("Error with Lister submit function.", err)
         })
     }
+
+
 
     // const getListerInfo = (email) => {
     //     axios.get("http://localhost:8000/api/lister/findOne", {email},{withCredentials:true, credentials:"include"})

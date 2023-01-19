@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 const Login = (props) => {
-  const {authToken, setAuthToken} =props
-  const {currentUSer, setCurrentUser} =props
+  const {currentUser, setCurrentUser} =props
   const [email, setEmail]=useState("")
   const [password, setPassword]=useState("")
 
@@ -20,13 +19,12 @@ const Login = (props) => {
     },{withCredentials:true, credentials:"include"})
     .then((res)=>{
       console.log("successfully logged in", res)
-      // console.log(res.data.lister)
-      setAuthToken(true)
       setCurrentUser({
         _id:res.data.lister._id,
         listerName:res.data.lister.listerName,
         email:res.data.lister.email})
-      navigate("/mainLists")
+        console.log(currentUser)
+      navigate("/dashboard")
     }).catch(err=>{
       console.log("Login error.", err)
     })
