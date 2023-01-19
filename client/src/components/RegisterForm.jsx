@@ -25,24 +25,19 @@ const RegisterForm = (props) => {
             console.log(res)
             setAuthToken(true)
             navigate("/mainLists")
-            setCurrentUser({
-                _id:null,
-                listerName,
-                email,
-            })
         }).catch(err=>{
             console.log("Error with Lister submit function.", err)
         })
     }
 
-    const getListerInfo = (email) => {
-        axios.get("http://localhost:8000/api/lister/findOne", {email},{withCredentials:true, credentials:"include"})
-        .then(res => res.json(res))
-        .catch(err =>{
-            console.log("Couldn't grab new Lister(attempt at registration)", err)
+    // const getListerInfo = (email) => {
+    //     axios.get("http://localhost:8000/api/lister/findOne", {email},{withCredentials:true, credentials:"include"})
+    //     .then(res => res.json(res))
+    //     .catch(err =>{
+    //         console.log("Couldn't grab new Lister(attempt at registration)", err)
             
-        })
-    }
+    //     })
+    // }
 
     return (
     <div>
@@ -50,9 +45,9 @@ const RegisterForm = (props) => {
             <label>Lister Name:</label>
             <input type="text" onChange={(e)=>setListerName(e.target.value)} />
             <label>Email:</label>
-            <input type="text" onChange={(e)=>setEmail(e.target.value)} />
+            <input type="text" onChange={(e)=>setEmail(e.target.value)} /> //test for uniqueness
             <label>Password:</label>
-            <input type="text" onChange={(e)=>setPassword(e.target.value)} />
+            <input type="text" onChange={(e)=>setPassword(e.target.value)} />//make sure to change to type password
             <label>Confirm Password:</label>
             <input type="text" onChange={(e)=>setConfirmPassword(e.target.value)} />
             <button>Sign up!</button>

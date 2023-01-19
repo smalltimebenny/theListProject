@@ -38,5 +38,32 @@ module.exports = {
         .catch(err=>{
             console.log("Delete Entry error.")
             res.status(400).json(err)})
+    },
+    findBooks:(req,res)=>{
+        Entry.find({lists:"Books"})
+        .then(entries=>{
+            // console.log(entries)
+            res.json(entries)})
+        .catch(err=>{
+            console.log("Find Books List error.")
+            res.status(400).json(err)})
+    },
+    findMovies:(req,res)=>{
+        Entry.find({lists:"Movies"})
+        .then(entries=>{
+            // console.log(entries)
+            res.json(entries)})
+        .catch(err=>{
+            console.log("Find Movies List error.")
+            res.status(400).json(err)})
+    },
+    findMusic:(req,res)=>{
+        Entry.find({lists:"Music"})
+        .then(entries=>{
+            // console.log(entries)
+            res.json(entries)})
+        .catch(err=>{
+            console.log("Find Music List error.")
+            res.status(400).json(err)})
+    },
     }
-}

@@ -12,7 +12,7 @@ const Login = (props) => {
   const navigate = useNavigate()
 
 
-  const submitHandler = (e) => {
+  const loginListerHandler = (e) => {
     e.preventDefault()
     axios.post("http://localhost:8000/api/loginLister",{
       email,
@@ -20,7 +20,7 @@ const Login = (props) => {
     },{withCredentials:true, credentials:"include"})
     .then((res)=>{
       console.log("successfully logged in", res)
-      console.log(res.data.lister)
+      // console.log(res.data.lister)
       setAuthToken(true)
       setCurrentUser({
         _id:res.data.lister._id,
@@ -35,7 +35,7 @@ const Login = (props) => {
 
   return (
     <div>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={loginListerHandler}>
           <label>Email:</label>
           <input type="text" onChange={(e)=>setEmail(e.target.value)} />
           <label>Password:</label>
