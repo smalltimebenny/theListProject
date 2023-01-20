@@ -45,7 +45,7 @@ const LandingPage = (props) => {
     }
 
     const deleteEntry = (entryId) =>{
-        axios.delete("http://localhost:8000/api/entry/"+entryId)
+        axios.delete("http://localhost:8000/api/entry/"+entryId,{withCredentials:true, credentials:"include"})
             .then(res=> {
                 console.log(res.data)
                 const newBooksList = books.filter((item, index) => item._id!==entryId)
@@ -79,7 +79,7 @@ const LandingPage = (props) => {
                                 <td>{book.value}</td>
                                 <td>{book.name}</td>
                                 <td>{book.Author}</td>
-                                <td><button onClick={()=>{deleteEntry(book._id)}}>Delete</button></td>
+                                {/* <td><button onClick={()=>{deleteEntry(book._id)}}>Delete</button></td> */}
                             </tr>
                         )
                     })}
@@ -107,7 +107,7 @@ const LandingPage = (props) => {
                             <td>{movie.value}</td>
                             <td>{movie.name}</td>
                             <td>{movie.ReleaseYear}</td>
-                            <td><button onClick={()=>{deleteEntry(movie._id)}}>Delete</button></td>
+                            {/* <td><button onClick={()=>{deleteEntry(movie._id)}}>Delete</button></td> */}
                         </tr>
                     )
                 })}
@@ -135,7 +135,7 @@ const LandingPage = (props) => {
                             <td>{music.value}</td>
                             <td>{music.name}</td>
                             <td>{music.Artist}</td>
-                            <td><button onClick={()=>{deleteEntry(music._id)}}>Delete</button></td>
+                            {/* <td><button onClick={()=>{deleteEntry(music._id)}}>Delete</button></td> */}
                         </tr>
                     )
                 })}

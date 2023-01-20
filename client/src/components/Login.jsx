@@ -22,8 +22,9 @@ const Login = (props) => {
       setCurrentUser({
         _id:res.data.lister._id,
         listerName:res.data.lister.listerName,
-        email:res.data.lister.email})
-        console.log(currentUser)
+        email:res.data.lister.email,
+        consumed:res.data.lister.consumed,
+        doNotWant:res.data.lister.doNotWant})
       navigate("/dashboard")
     }).catch(err=>{
       console.log("Login error.", err)

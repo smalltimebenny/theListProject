@@ -23,7 +23,7 @@ const AddForm = (props) => {
             lists,
             [varKey]:varVal,
             listerAdded: currentUser.listerName,
-        })
+        },{withCredentials:true, credentials:"include"})
         .then(res=>{
             console.log(res)
         })
@@ -100,7 +100,7 @@ const AddForm = (props) => {
                 <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
-            <input type="hidden" value={currentUser.listerName} />
+            {/* <input type="hidden" value={currentUser.listerName} /> */}
             <input type="submit" value="Add entry" />
         </form>
     </div>

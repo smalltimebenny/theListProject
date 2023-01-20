@@ -26,10 +26,10 @@ function App() {
           <Route path="/" element={<LandingPage currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/logRegPage" element={<LogRegPage currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-          {/* <Route path="/mainLists" element={<BasicList currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+          <Route path="/mainLists" element={<BasicList currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/addElement" element={<AddForm currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/register" element={<RegisterForm currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-          <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} /> */}
+          <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
         </Routes>
       </BrowserRouter>
           

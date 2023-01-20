@@ -10,6 +10,7 @@ const BasicList = (props) => {
 
     useEffect(
       ()=>{
+        console.log("main lists", currentUser)
         if(!currentUser){
           navigate("/logRegPage")
         }
