@@ -36,26 +36,26 @@ const LandingPage = (props) => {
         .catch(err=>console.log("Music List didn't load.", err))
     }, [])
 
-    const logBooks = () =>{
+    // const logBooks = () =>{
         
-            for(let i=0; i<books.length; i++){
-                console.log(books[i].name)
-            }
+    //         for(let i=0; i<books.length; i++){
+    //             console.log(books[i].name)
+    //         }
         
-    }
+    // }
 
-    const deleteEntry = (entryId) =>{
-        axios.delete("http://localhost:8000/api/entry/"+entryId,{withCredentials:true, credentials:"include"})
-            .then(res=> {
-                console.log(res.data)
-                const newBooksList = books.filter((item, index) => item._id!==entryId)
-                const newMoviesList = movies.filter((item, index) => item._id!==entryId)
-                const newMusicsList = musics.filter((item, index) => item._id!==entryId)
-                setBooks(newBooksList)
-                setMovies(newMoviesList)
-                setMusics(newMusicsList)
-            })
-    }
+    // const deleteEntry = (entryId) =>{
+    //     axios.delete("http://localhost:8000/api/entry/"+entryId,{withCredentials:true, credentials:"include"})
+    //         .then(res=> {
+    //             console.log(res.data)
+    //             const newBooksList = books.filter((item, index) => item._id!==entryId)
+    //             const newMoviesList = movies.filter((item, index) => item._id!==entryId)
+    //             const newMusicsList = musics.filter((item, index) => item._id!==entryId)
+    //             setBooks(newBooksList)
+    //             setMovies(newMoviesList)
+    //             setMusics(newMusicsList)
+    //         })
+    // }
 
     return (
     <div>

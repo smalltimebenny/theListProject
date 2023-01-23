@@ -51,6 +51,7 @@ const getMyRecs = (userId)=>{
                             let temper = {
                                 name: array1[i].name,
                                 lists: array1[i].lists,
+                                _id: array1[i]._id,
                             }
                             namesSeen.push(temper)
                     }
@@ -65,14 +66,16 @@ const getMyRecs = (userId)=>{
                         let group = {
                             value:0,
                             name: namesSeen[i].name,
-                            lists: namesSeen[i].lists
+                            lists: namesSeen[i].lists,
+                            _id: namesSeen[i]._id,
                         }
                         for(let j=0; j<rankk.length;j++){
                             let tempVal = group.value + rankk[j].value
                             group = {
                                 value: tempVal,
                                 name: namesSeen[i].name,
-                                lists: namesSeen[i].lists
+                                lists: namesSeen[i].lists,
+                                _id: namesSeen[i]._id
                             }
                             
                         }groups.push(group)
@@ -244,13 +247,13 @@ const getMyRecs = (userId)=>{
             <h2>My Recommendations</h2>
             <AddForm setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <h3>Books</h3>
+            {/* need dynamic ranking */}
             <table>
                     <thead>
                         <tr>
                         <th>Rank</th>
                         <th>Score</th>
                         <th>Title</th>
-                        <th>Author</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -261,27 +264,56 @@ const getMyRecs = (userId)=>{
                                 <td>1.</td>
                                 <td>{item.value}</td>  
                                 <td>{item.name}</td>
+                                <td><Link to={`/entry/update/${item._id}`}>Update</Link></td>
                             </tr>
                         )
                     }})}
                     </tbody>
                     </table>
             <h3>Movies</h3>
-            {myRecs.map((item, id) =>{
+            <table>
+                    <thead>
+                        <tr>
+                        <th>Rank</th>
+                        <th>Score</th>
+                        <th>Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {myRecs.map((item, id) =>{
                     if(item.lists==="Movies"){
                         return(
-                            <p>{item.value}  {item.name}</p>
+                            <tr>
+                                <td>1.</td>
+                                <td>{item.value}</td>  
+                                <td>{item.name}</td>
+                            </tr>
                         )
-                    }
-                })}
+                    }})}
+                    </tbody>
+                    </table>
             <h3>Music</h3>
-            {myRecs.map((item, id) =>{
+            <table>
+                    <thead>
+                        <tr>
+                        <th>Rank</th>
+                        <th>Score</th>
+                        <th>Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {myRecs.map((item, id) =>{
                     if(item.lists==="Music"){
                         return(
-                            <p>{item.value}  {item.name}</p>
+                            <tr>
+                                <td>1.</td>
+                                <td>{item.value}</td>  
+                                <td>{item.name}</td>
+                            </tr>
                         )
-                    }
-                })}
+                    }})}
+                    </tbody>
+                    </table>
         </div>
         <div>
             <h2>Recommended to me</h2>
