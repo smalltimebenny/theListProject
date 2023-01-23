@@ -22,13 +22,13 @@ const AddForm = (props) => {
             value,
             lists,
             [varKey]:varVal,
-            listerAdded: currentUser.listerName,
+            listerAdded: currentUser._id,
         },{withCredentials:true, credentials:"include"})
         .then(res=>{
             console.log(res)
         })
         .catch(err => {
-            console.log("Error with entry submit function.")
+            console.log("Error with entry submit function.",err)
             setErrors(err.response.data.errors)
         })
         // console.log(lists)

@@ -8,6 +8,7 @@ const Login = (props) => {
   const [email, setEmail]=useState("")
   const [password, setPassword]=useState("")
 
+  const [errors, setErrors] =useState("")
   const navigate = useNavigate()
 
 
@@ -28,7 +29,9 @@ const Login = (props) => {
       navigate("/dashboard")
     }).catch(err=>{
       console.log("Login error.", err)
+      setErrors(err.response.data.error)
     })
+    
   }
 
 
@@ -38,9 +41,10 @@ const Login = (props) => {
           <label>Email:</label>
           <input type="text" onChange={(e)=>setEmail(e.target.value)} />
           <label>Password:</label>
-          <input type="text" onChange={(e)=>setPassword(e.target.value)} />
+          <input type="password" onChange={(e)=>setPassword(e.target.value)} />
           <button>Login</button>
         </form>
+        {errors && <span>{errors}</span>}
         
     </div>
   )

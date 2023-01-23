@@ -36,13 +36,14 @@ const RegisterForm = (props) => {
             email,
             password,
             confirmPassword,
-        }, {withCredentials:true, credentials:"include"})
+        },{withCredentials:true, credentials:"include"})
         .then((res)=>{
-            console.log(res)
-            autoLogin(email, password)
-            navigate("/")
+            console.log("guess it worked",res)
+            // autoLogin(email, password)
+            // navigate("/")
         }).catch(err=>{
             console.log("Error with Lister submit function.", err)
+            setErrors(err.response.data.errors)
         })
     }
 
@@ -62,12 +63,16 @@ const RegisterForm = (props) => {
         <form onSubmit={submitHandler}>
             <label>Lister Name:</label>
             <input type="text" onChange={(e)=>setListerName(e.target.value)} />
+            {errors.listerName && <span>{errors.listerName.message}</span>}
             <label>Email:</label>
-            <input type="text" onChange={(e)=>setEmail(e.target.value)} /> //test for uniqueness
+            <input type="text" onChange={(e)=>setEmail(e.target.value)} />
+            {errors.email && <span>{errors.email.message}</span>}
             <label>Password:</label>
             <input type="text" onChange={(e)=>setPassword(e.target.value)} />//make sure to change to type password
+            {errors.password && <span>{errors.password.message}</span>}
             <label>Confirm Password:</label>
             <input type="text" onChange={(e)=>setConfirmPassword(e.target.value)} />
+            {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
             <button>Sign up!</button>
         </form>
         
