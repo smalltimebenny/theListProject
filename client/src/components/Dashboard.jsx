@@ -15,69 +15,82 @@ const Dashboard = (props) => {
     const navigate = useNavigate()
 
 useEffect(()=>{
-    const fetchInitialData = async () =>{
+    const fetchInitialData = () =>{
         axios.get("http://localhost:8000/api/lister/loggedIn", {withCredentials:true})
-            .then(res=>{
+        .then(res=>{
                 // console.log(res)
                 console.log("initial res data",res.data)
+                setCurrentUser({
+                    _id: res.data[0]._id,
+                    listerName:res.data[0].listerName,
+                    email:res.data[0].email,
+                    consumed:res.data[0].consumed,
+                    doNotWant:res.data[0].doNotWant,
+                })
+                getMyRecs(res.data[0]._id)
             })
             .catch(err=>console.log("initial data fetch error",err))
             
     }
     fetchInitialData()
+    // if (currentUser){
+    //     getMyRecs()
+    // }
 },[])
 
 
-    useEffect(()=>{
-        axios.get("http://localhost:8000/api/entry/findEntriesByLister/"+currentUser._id)
-            .then(res=>{
-                console.log("entries by user data", res.data)
-                let array1 = res.data
-                let namesSeen = []
-                for (let i=0; i<array1.length;i++){
-                    let title = array1[i].name
-                    if(!namesSeen.includes(title)){
-                        let temper = {
-                            name: array1[i].name,
-                            lists: array1[i].lists,
-                        }
-                        namesSeen.push(temper)
-                }
-                console.log("names seen", namesSeen)
-                }
-
-// console.log(titlesSeen)
-                let groups =[]
-                for(let i=0; i<namesSeen.length;i++){
-                    let rankk = array1.filter(item =>item.name == namesSeen[i].name)
-                    console.log("rankk", rankk)
-                    let group = {
-                        value:0,
-                        name: namesSeen[i].name,
-                        lists: namesSeen[i].lists
+const getMyRecs = (userId)=>{
+            axios.get("http://localhost:8000/api/entry/findEntriesByLister/"+userId)
+                .then(res=>{
+                    console.log("entries by user data", res.data)
+                    let array1 = res.data
+                    let namesSeen = []
+                    for (let i=0; i<array1.length;i++){
+                        let title = array1[i].name
+                        if(!namesSeen.includes(title)){
+                            let temper = {
+                                name: array1[i].name,
+                                lists: array1[i].lists,
+                            }
+                            namesSeen.push(temper)
                     }
-                    for(let j=0; j<rankk.length;j++){
-                        let tempVal = group.value + rankk[j].value
-                        group = {
-                            value: tempVal,
+                    console.log("names seen", namesSeen)
+                    }
+        
+        // console.log(titlesSeen)
+                    let groups =[]
+                    for(let i=0; i<namesSeen.length;i++){
+                        let rankk = array1.filter(item =>item.name == namesSeen[i].name)
+                        console.log("rankk", rankk)
+                        let group = {
+                            value:0,
                             name: namesSeen[i].name,
                             lists: namesSeen[i].lists
                         }
-                        
-                    }groups.push(group)
+                        for(let j=0; j<rankk.length;j++){
+                            let tempVal = group.value + rankk[j].value
+                            group = {
+                                value: tempVal,
+                                name: namesSeen[i].name,
+                                lists: namesSeen[i].lists
+                            }
+                            
+                        }groups.push(group)
+                    }
+        
+                    console.log("groups",groups)
+                    let sortedGroups = groups.sort(
+                        (a,b)=>(a.value<b.value) ? 1 : (a.value>b.value) ? -1 : 0
+                        )
+                    console.log("sorted groups",sortedGroups)
+        
+                    setMyRecs(sortedGroups)
                 }
-
-                console.log("groups",groups)
-                let sortedGroups = groups.sort(
-                    (a,b)=>(a.value<b.value) ? 1 : (a.value>b.value) ? -1 : 0
                     )
-                console.log("sorted groups",sortedGroups)
-
-                setMyRecs(sortedGroups)
-            }
-                )
-            .catch(err=>console.log("my recs fetch error", err))
-    },[])
+                .catch(err=>console.log("my recs fetch error", err))
+        }
+        
+        
 
         useEffect(()=>{
             axios.get("http://localhost:8000/api/getBooks")
@@ -231,13 +244,28 @@ useEffect(()=>{
             <h2>My Recommendations</h2>
             <AddForm setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <h3>Books</h3>
-            {myRecs.map((item, id) =>{
+            <table>
+                    <thead>
+                        <tr>
+                        <th>Rank</th>
+                        <th>Score</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {myRecs.map((item, id) =>{
                     if(item.lists==="Books"){
                         return(
-                            <p>{item.value}  {item.name}</p>
+                            <tr>
+                                <td>1.</td>
+                                <td>{item.value}</td>  
+                                <td>{item.name}</td>
+                            </tr>
                         )
-                    }
-                })}
+                    }})}
+                    </tbody>
+                    </table>
             <h3>Movies</h3>
             {myRecs.map((item, id) =>{
                     if(item.lists==="Movies"){
