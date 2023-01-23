@@ -14,12 +14,14 @@ const LogRegPage = (props) => {
 
 
   return (
-    <div>
-        <Login setCurrentUser={setCurrentUser} currentUser={currentUser} />
+    <div class="flex content-evenly mx-28 px-48 py-20 absolute top-1/4 h-3/4 w-auto text-neon-orange overflow-auto">
+        <Login class="mx-12" setCurrentUser={setCurrentUser} currentUser={currentUser} />
+        <div class="mx-12">
         <Announcement />
         <Announcement />
         <Announcement />
-        <RegisterForm setCurrentUser={setCurrentUser} currentUser={currentUser} />
+        </div>
+        <RegisterForm class="mx-12" setCurrentUser={setCurrentUser} currentUser={currentUser} />
     </div>
   )
 }

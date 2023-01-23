@@ -121,8 +121,8 @@ return sortedGroups
     // }
 
     return (
-    <div>
-        <div>
+    <div class="flex content-evenly mx-28 px-48 py-20 absolute top-1/4 h-3/4 w-screen text-neon-orange overflow-auto" >
+        <div class="mx-12">
             <div>
                 <h2>Books</h2>
                 <table>
@@ -152,7 +152,7 @@ return sortedGroups
                 </table>
             </div>
         </div>
-        <div>
+        <div class="mx-12">
             <div>
             <h2>Movies</h2>
             <table>
@@ -181,7 +181,7 @@ return sortedGroups
             </table>
             </div>
         </div>
-        <div>
+        <div class="mx-12">
             <div>
             <h2>Music</h2>
             <table>

@@ -242,8 +242,9 @@ const getMyRecs = (userId)=>{
         }
 
     return (
-    <div>
-        <div>
+    <div class="mx-12 px-2 py-20 absolute top-1/4 h-3/4 w-full text-neon-orange overflow-auto">
+        
+        <div class="border border-white w-1/4">
             <h2>My Recommendations</h2>
             <AddForm setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <h3>Books</h3>
@@ -315,7 +316,7 @@ const getMyRecs = (userId)=>{
                     </tbody>
                     </table>
         </div>
-        <div>
+        <div class="border border-green-300 h-fit w-1/4">
             <h2>Recommended to me</h2>
             <div>
                 <h3>Books</h3>
@@ -404,7 +405,9 @@ const getMyRecs = (userId)=>{
             </table>
             </div>
         </div>
-        <div>
+
+
+        <div class="border border-yellow-300 w-1/4">
             <h2>Consumed it!</h2>
                 <h2>Books</h2>
                 {consumedd.map((item, id) =>{
@@ -432,7 +435,7 @@ const getMyRecs = (userId)=>{
                     }
                 })}
         </div>
-        <div>
+        <div class="border border-purple-400 w-1/4">
             <h3>No thanks!</h3>
             <h2>Books</h2>
                 {doNotWantIt.map((item, id) =>{
@@ -461,6 +464,8 @@ const getMyRecs = (userId)=>{
                 })}
         </div>
     </div>
+
+        
     )
 }
 

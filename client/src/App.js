@@ -10,6 +10,7 @@ import LandingPage from "./components/LandingPage"
 import LogRegPage from "./components/LogRegPage"
 import Dashboard from "./components/Dashboard"
 import UpdateEntryForm from "./components/UpdateEntryForm"
+import Body from "./components/Body"
 
 //button to call multiple basic lists
 //figure out ranking and make leaderboards
@@ -21,10 +22,12 @@ function App() {
 
   return (
     <div className="App">
+      <Body />
       <BrowserRouter>
       <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser} />
+      
         <Routes>
-          <Route path="/" element={<LandingPage currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+          <Route path="/" element={<LandingPage  currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/logRegPage" element={<LogRegPage currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/mainLists" element={<BasicList currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
@@ -33,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/entry/update/:id1" element={<UpdateEntryForm currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
         </Routes>
+        
       </BrowserRouter>
           
       

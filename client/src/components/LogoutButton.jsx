@@ -21,7 +21,7 @@ const LogoutButton = (props) => {
 
   return (
     <div><form onSubmit={logout}>
-        <button>Logout</button>
+        <button class="text-neon-orange hover:bg-neon-green visited:text-red-600">Logout</button>
     </form>
     </div>
   )
