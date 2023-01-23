@@ -62,18 +62,18 @@ const RegisterForm = (props) => {
     <div>
         <form onSubmit={submitHandler}>
             <label>Lister Name:</label>
-            <input type="text" onChange={(e)=>setListerName(e.target.value)} />
+            <input class="bg-blue-900" type="text" onChange={(e)=>setListerName(e.target.value)} />
             {errors.listerName && <span>{errors.listerName.message}</span>}
             <label>Email:</label>
-            <input type="text" onChange={(e)=>setEmail(e.target.value)} />
+            <input class="bg-blue-900" type="text" onChange={(e)=>setEmail(e.target.value)} />
             {errors.email && <span>{errors.email.message}</span>}
             <label>Password:</label>
-            <input type="text" onChange={(e)=>setPassword(e.target.value)} />//make sure to change to type password
+            <input class="bg-blue-900" type="password" onChange={(e)=>setPassword(e.target.value)} />
             {errors.password && <span>{errors.password.message}</span>}
             <label>Confirm Password:</label>
-            <input type="text" onChange={(e)=>setConfirmPassword(e.target.value)} />
+            <input class="bg-blue-900" type="text" onChange={(e)=>setConfirmPassword(e.target.value)} />
             {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
-            <button>Sign up!</button>
+            <button class="border border-neon-yellow">Sign up!</button>
         </form>
         
     </div>

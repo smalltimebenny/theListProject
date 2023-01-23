@@ -28,9 +28,6 @@ module.exports = {
         "full-box":"0px 0px 10px 10px",
         'full-shadow' : '0px 0px 20px 20px rgb(224,231,34)',
       },
-      gradientColorStops: {
-        "backgroundGradient" : ""
-      }
     },
     },
   plugins: [],

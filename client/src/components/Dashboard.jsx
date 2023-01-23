@@ -10,6 +10,8 @@ const Dashboard = (props) => {
     const [consumedd, setConsumedd] =useState([])
     const [doNotWantIt, setDoNotWantIt] =useState([])
     const [myRecs, setMyRecs] =useState([])
+    const [rawConsumedd, setRawConsumedd] =useState([])
+    const [rawDoNotWantIt, setRawDoNotWantIt] =useState([])
     const {currentUser, setCurrentUser} =props
     const {_id, entryTitle,entrySpecial} =useParams()
     const navigate = useNavigate()
@@ -28,21 +30,21 @@ useEffect(()=>{
                     doNotWant:res.data[0].doNotWant,
                 })
                 getMyRecs(res.data[0]._id)
+                getConsumed(res.data[0].consumed)
+                getDoNotWant(res.data[0].doNotWant)
             })
+            // .then(console.log("current user", currentUser))
+            // .then(getDoNotWant(doNotWantIt))
             .catch(err=>console.log("initial data fetch error",err))
             
     }
     fetchInitialData()
-    // if (currentUser){
-    //     getMyRecs()
-    // }
 },[])
-
 
 const getMyRecs = (userId)=>{
             axios.get("http://localhost:8000/api/entry/findEntriesByLister/"+userId)
                 .then(res=>{
-                    console.log("entries by user data", res.data)
+                    // console.log("entries by user data", res.data)
                     let array1 = res.data
                     let namesSeen = []
                     for (let i=0; i<array1.length;i++){
@@ -55,14 +57,14 @@ const getMyRecs = (userId)=>{
                             }
                             namesSeen.push(temper)
                     }
-                    console.log("names seen", namesSeen)
+                    // console.log("names seen", namesSeen)
                     }
         
         // console.log(titlesSeen)
                     let groups =[]
                     for(let i=0; i<namesSeen.length;i++){
                         let rankk = array1.filter(item =>item.name == namesSeen[i].name)
-                        console.log("rankk", rankk)
+                        // console.log("rankk", rankk)
                         let group = {
                             value:0,
                             name: namesSeen[i].name,
@@ -81,11 +83,11 @@ const getMyRecs = (userId)=>{
                         }groups.push(group)
                     }
         
-                    console.log("groups",groups)
+                    // console.log("groups",groups)
                     let sortedGroups = groups.sort(
                         (a,b)=>(a.value<b.value) ? 1 : (a.value>b.value) ? -1 : 0
                         )
-                    console.log("sorted groups",sortedGroups)
+                    // console.log("sorted groups",sortedGroups)
         
                     setMyRecs(sortedGroups)
                 }
@@ -123,28 +125,28 @@ const getMyRecs = (userId)=>{
         }, [])
 
 
-        const getInitialData = async () => {
-            axios.get("http://localhost:8000/api/lister/loggedIn",{withCredentials:true})
-                .then((res) => 
-                {
-                    console.log("auth test", res.data)
-                    setCurrentUser({
-                        _id:res.data[0]._id,
-                        listerName:res.data[0].listerName,
-                        email:res.data[0].email,
-                        consumed:res.data[0].consumed,
-                        doNotWant:res.data[0].doNotWant})
-                })
-                .catch(err=>{
-                    console.log("Didn't get info for logged in user on dashboard.", err)
-                    navigate("/logRegPage")
-                })
-        }
+        // const getInitialData = async () => {
+        //     axios.get("http://localhost:8000/api/lister/loggedIn",{withCredentials:true})
+        //         .then((res) => 
+        //         {
+        //             console.log("auth test", res.data)
+        //             setCurrentUser({
+        //                 _id:res.data[0]._id,
+        //                 listerName:res.data[0].listerName,
+        //                 email:res.data[0].email,
+        //                 consumed:res.data[0].consumed,
+        //                 doNotWant:res.data[0].doNotWant})
+        //         })
+        //         .catch(err=>{
+        //             console.log("Didn't get info for logged in user on dashboard.", err)
+        //             navigate("/logRegPage")
+        //         })
+        // }
 
         const getConsumed = (list) =>{
             let tempList =list
             let temptemp = consumedd
-            console.log("consumedd",temptemp)
+            console.log("temp temp is consumedd",temptemp)
             for(let i = 0; i<tempList.length; i++){
                 axios.get("http://localhost:8000/api/entry/findOne/"+tempList[i])
                 .then(res=>{
@@ -168,6 +170,7 @@ const getMyRecs = (userId)=>{
                 })
                 .catch(err =>console.log("getdonotwant error", err))
             }
+            console.log("temptemp3", temptemp3)
             setDoNotWantIt(temptemp3)
         }
         // const findOneLister = (userId) => {
@@ -243,8 +246,8 @@ const getMyRecs = (userId)=>{
 
     return (
     <div class="mx-12 px-2 py-20 absolute top-1/4 h-3/4 w-full text-neon-orange overflow-auto">
-        
-        <div class="border border-white w-1/4">
+        <div class="flex justify-evenly">
+        <div class="border border-white h-fit w-fit">
             <h2>My Recommendations</h2>
             <AddForm setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <h3>Books</h3>
@@ -316,7 +319,7 @@ const getMyRecs = (userId)=>{
                     </tbody>
                     </table>
         </div>
-        <div class="border border-green-300 h-fit w-1/4">
+        <div class="border border-green-300 h-fit w-fit">
             <h2>Recommended to me</h2>
             <div>
                 <h3>Books</h3>
@@ -346,9 +349,9 @@ const getMyRecs = (userId)=>{
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div>
-            <div>
+        
+        
+            
             <h3>Movies</h3>
             <table>
                 <thead>
@@ -375,10 +378,9 @@ const getMyRecs = (userId)=>{
                 })}
                 </tbody>
             </table>
-            </div>
-        </div>
-        <div>
-            <div>
+            
+        
+            
             <h3>Music</h3>
             <table>
                 <thead>
@@ -398,16 +400,19 @@ const getMyRecs = (userId)=>{
                             <td>{music.name}</td>
                             <td>{music.Artist}</td>
                             <td><button onClick={()=>{deleteEntry(music._id)}}>Delete</button></td>
+                            <td><button onClick={()=>{consumed(currentUser._id, music._id)}}>Seen it!</button></td>
+                                <td><button onClick={()=>{blackList(currentUser._id, music._id)}}>No thanks!</button></td>
                         </tr>
                     )
                 })}
                 </tbody>
             </table>
-            </div>
+            
         </div>
-
-
-        <div class="border border-yellow-300 w-1/4">
+        </div>
+        
+        <div class="flex justify-evenly">
+            <div class="border border-yellow-300 h-fit w-fit">
             <h2>Consumed it!</h2>
                 <h2>Books</h2>
                 {consumedd.map((item, id) =>{
@@ -435,7 +440,7 @@ const getMyRecs = (userId)=>{
                     }
                 })}
         </div>
-        <div class="border border-purple-400 w-1/4">
+        <div class="border border-purple-400 h-fit w-fit">
             <h3>No thanks!</h3>
             <h2>Books</h2>
                 {doNotWantIt.map((item, id) =>{
@@ -463,6 +468,8 @@ const getMyRecs = (userId)=>{
                     }
                 })}
         </div>
+        </div>
+        
     </div>
 
         

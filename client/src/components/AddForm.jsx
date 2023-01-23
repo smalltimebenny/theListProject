@@ -60,7 +60,7 @@ const AddForm = (props) => {
     <div>
         <form onSubmit={entryAdd}>
             <label>Rank:</label>
-            <select onChange={handleRank}>
+            <select class="bg-blue-900" onChange={handleRank}>
                 <option>Rank</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -70,10 +70,10 @@ const AddForm = (props) => {
                 <option value="0.5">Out of top 5</option>
             </select>
             <label>Name:</label>
-            <input type="text" onChange={(e)=>setName(e.target.value)} />
+            <input class="bg-blue-900" type="text" onChange={(e)=>setName(e.target.value)} />
             {errors.name && <span>{errors.name.message}</span>}
             <label>Lists:</label>
-            <select onChange={(e)=>listChange(e.target.value)}>
+            <select class="bg-blue-900" onChange={(e)=>listChange(e.target.value)}>
                 <option value="null" >Pick a List</option>
                 <option value="Books">Books</option>
                 <option value="Movies">Movies</option>
@@ -87,21 +87,21 @@ const AddForm = (props) => {
             {errors.lists && <span>{errors.lists.message}</span>}
             {lists=="Books" && <span>
                 <br /><label>Author:</label>
-                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                <input class="bg-blue-900" type="text" onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
             {lists=="Movies" && <span>
                 <br /><label>Release Year:</label>
-                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                <input class="bg-blue-900" type="text" onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
             {lists=="Music" && <span>
                 <br /><label>Artist:</label>
-                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                <input class="bg-blue-900" type="text" onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
             {/* <input type="hidden" value={currentUser.listerName} /> */}
-            <input type="submit" value="Add entry" />
+            <input class="border border-neon-yellow" type="submit" value="Add entry" />
         </form>
     </div>
   )

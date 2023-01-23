@@ -37,12 +37,12 @@ const Login = (props) => {
 
   return (
     <div>
-        <form onSubmit={loginListerHandler}>
+        <form  onSubmit={loginListerHandler}>
           <label>Email:</label>
-          <input type="text" onChange={(e)=>setEmail(e.target.value)} />
+          <input class="bg-blue-900" type="text" onChange={(e)=>setEmail(e.target.value)} />
           <label>Password:</label>
-          <input type="password" onChange={(e)=>setPassword(e.target.value)} />
-          <button>Login</button>
+          <input class="bg-blue-900" type="password" onChange={(e)=>setPassword(e.target.value)} />
+          <button class="border border-neon-yellow">Login</button>
         </form>
         {errors && <span>{errors}</span>}
         
