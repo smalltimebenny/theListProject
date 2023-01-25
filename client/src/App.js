@@ -22,9 +22,9 @@ function App() {
 
   return (
     <div className="App">
-      <Body />
+      {/* <Body /> */}
       <BrowserRouter>
-      <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser} />
+      
       
         <Routes>
           <Route path="/" element={<LandingPage  currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
@@ -36,7 +36,7 @@ function App() {
           <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/entry/update/:id1" element={<UpdateEntryForm currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
         </Routes>
-        
+        <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser} />
       </BrowserRouter>
           
       

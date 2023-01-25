@@ -39,8 +39,8 @@ const RegisterForm = (props) => {
         },{withCredentials:true, credentials:"include"})
         .then((res)=>{
             console.log("guess it worked",res)
-            // autoLogin(email, password)
-            // navigate("/")
+            autoLogin(email, password)
+            navigate("/")
         }).catch(err=>{
             console.log("Error with Lister submit function.", err)
             setErrors(err.response.data.errors)
@@ -71,7 +71,7 @@ const RegisterForm = (props) => {
             <input class="bg-blue-900" type="password" onChange={(e)=>setPassword(e.target.value)} />
             {errors.password && <span>{errors.password.message}</span>}
             <label>Confirm Password:</label>
-            <input class="bg-blue-900" type="text" onChange={(e)=>setConfirmPassword(e.target.value)} />
+            <input class="bg-blue-900" type="password" onChange={(e)=>setConfirmPassword(e.target.value)} />
             {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
             <button class="border border-neon-yellow">Sign up!</button>
         </form>

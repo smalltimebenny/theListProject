@@ -21,7 +21,8 @@ const LandingPage = (props) => {
         axios.get("http://localhost:8000/api/getBooks")
         .then(res=>{
             console.log("books res data",res.data)
-            setBooks(aggregateRank(res.data))
+            let cleanedData = res.data.filter(entry=>entry.name !== "I've got to add things to the list!")
+            setBooks(aggregateRank(cleanedData))
         })
         .catch(err=>console.log("Book List didn't load.", err))
     }
@@ -121,8 +122,9 @@ return sortedGroups
     // }
 
     return (
-    <div class="flex content-evenly mx-28 px-48 py-20 absolute top-1/4 h-3/4 w-screen text-neon-orange overflow-auto" >
-        <div class="mx-12">
+    <div class="absolute h-full w-full bg-gradient-to-br from-fuchsia-900 via-black to-middle-blue px-48 py-20 text-neon-orange" >
+        <div class="flex content-evenly relative h-3/4 top-1/4 overflow-auto">
+            <div class="mx-12">
             <div>
                 <h2>Books</h2>
                 <table>
@@ -151,60 +153,61 @@ return sortedGroups
                     
                 </table>
             </div>
-        </div>
-        <div class="mx-12">
-            <div>
-            <h2>Movies</h2>
-            <table>
-                <thead>
-                    <tr>
-                    <th>Score</th>
-                    <th>Title</th>
-                    <th>Release Year</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {
-                        movies.map((movie,id)=>{
-                            
-                                return(
-                                    <tr>
-                                        <td>{movie.value}</td>
-                                        <td>{movie.name}</td>
-                                        <td>{movie.Author}</td>
-                                    </tr>
-                                )
-                            })
-                        
-                    }
-                </tbody>
-            </table>
             </div>
-        </div>
-        <div class="mx-12">
-            <div>
-            <h2>Music</h2>
-            <table>
-                <thead>
-                    <tr>
-                    <th>Score</th>
-                    <th>Title</th>
-                    <th>Artist</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {musics.map((music, _id) =>{
-                    return(
-                        <tr>
-                            <td>{music.value}</td>
-                            <td>{music.name}</td>
-                            <td>{music.Artist}</td>
-                            {/* <td><button onClick={()=>{deleteEntry(music._id)}}>Delete</button></td> */}
-                        </tr>
-                    )
-                })}
-                </tbody>
-            </table>
+            <div class="mx-12">
+                    <div>
+                    <h2>Movies</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Score</th>
+                            <th>Title</th>
+                            <th>Release Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {
+                                movies.map((movie,id)=>{
+                                    
+                                        return(
+                                            <tr>
+                                                <td>{movie.value}</td>
+                                                <td>{movie.name}</td>
+                                                <td>{movie.Author}</td>
+                                            </tr>
+                                        )
+                                    })
+                                
+                            }
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+            <div class="mx-12">
+                    <div>
+                    <h2>Music</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Score</th>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {musics.map((music, _id) =>{
+                            return(
+                                <tr>
+                                    <td>{music.value}</td>
+                                    <td>{music.name}</td>
+                                    <td>{music.Artist}</td>
+                                    {/* <td><button onClick={()=>{deleteEntry(music._id)}}>Delete</button></td> */}
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    </div>
             </div>
         </div>
     </div>

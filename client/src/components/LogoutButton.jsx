@@ -8,7 +8,7 @@ const LogoutButton = (props) => {
 
     const logout=(e)=>{
         e.preventDefault()
-        axios.get("http://localhost:8000/api/logoutLister")
+        axios.get("http://localhost:8000/api/logoutLister", {withCredentials:true, credentials:"include"})
         .then(res=>{
             console.log("logout", res)
             setCurrentUser(null)

@@ -24,9 +24,10 @@ const UpdateEntryForm = (props) => {
             axios.get("http://localhost:8000/api/entry/findOne/"+id1)
                 .then(res=>{
                     setName(res.data.name)
-                    // if(res.data.Author){setAuthor(res.data.Author)}
-                    // if(res.data.ReleaseYear)(setReleaseYear(res.data.ReleaseYear))
-                    // if(res.data.Artist){setArtist(res.data.Artist)}
+                    if(res.data.Author){setAuthor(res.data.Author)}
+                    if(res.data.ReleaseYear)(setReleaseYear(res.data.ReleaseYear))
+                    if(res.data.Artist){setArtist(res.data.Artist)}
+                    if(res.data.lists){setLists(res.data.lists)}
                 })
                 .catch(err=>console.log("find entry error", err))
         },[]
@@ -49,6 +50,7 @@ const UpdateEntryForm = (props) => {
         .catch(err => {
             console.log("Error with entry submit function.",err)
             setErrors(err.response.data.errors)
+            console.log("what gets sent to set errors", err.response.data.errors)
         })
         // console.log(lists)
     }
@@ -76,23 +78,10 @@ const UpdateEntryForm = (props) => {
     }
 
     return (
-    <div>
+    <div class="flex content-evenly px-48 py-20 absolute top-1/4 h-3/4 w-auto text-neon-orange overflow-auto">
         <form onSubmit={entryUpdate}>
-            <label>Rank:</label>
-            <select placeholder={rank} onChange={handleRank}>
-                <option>Rank</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="0.5">Out of top 5</option>
-            </select>
-            <label>Name:</label>
-            <input type="text" onChange={(e)=>setName(e.target.value)} />
-            {errors.name && <span>{errors.name.message}</span>}
-            <label>Lists:</label>
-            <select onChange={(e)=>listChange(e.target.value)}>
+        <label>Lists:</label>
+            <select defaultValue={lists} onChange={(e)=>listChange(e.target.value)}>
                 <option value="null" >Pick a List</option>
                 <option value="Books">Books</option>
                 <option value="Movies">Movies</option>
@@ -103,21 +92,35 @@ const UpdateEntryForm = (props) => {
                 <option value="Movies">Albums</option>
                 <option value="Songs">Songs</option> */}
             </select>
+            <label>Rank:</label>
+            <select defaultValue={rank} onChange={handleRank}>
+                <option>Rank</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="0.5">Out of top 5</option>
+            </select>
+            <label>Name:</label>
+            <input type="text" defaultValue={name} onChange={(e)=>setName(e.target.value)} />
+            {errors.name && <span>{errors.name.message}</span>}
             {lists=="Books" && <span>
-                <br /><label>Author:</label>
-                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                <label>Author:</label>
+                <input type="text" defaultValue={author} onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
             {lists=="Movies" && <span>
-                <br /><label>Release Year:</label>
-                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                <label>Release Year:</label>
+                <input type="text" defaultValue={releaseYear} onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
             {lists=="Music" && <span>
-                <br /><label>Artist:</label>
-                <input type="text" onChange={(e)=>setVarVal(e.target.value)} />
+                <label>Artist:</label>
+                <input type="text" defaultValue={artist} onChange={(e)=>setVarVal(e.target.value)} />
                 </span>
             }
+            {errors.lists && <span>{errors.lists.message}</span>}
             {/* <input type="hidden" value={id} /> */}
             {/* <input type="hidden" value={currentUser.listerName} /> */}
             <input type="submit" value="Add entry" />
