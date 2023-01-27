@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
 
 const EntrySchema = mongoose.Schema({
-    rank: {type:Number},
+    rank: {type:Number,
+            required: "Entries must be ranked!"},
     name:{type:String,
         required:[true, "Must have an entry!"],
         minLength:[2, "Must be at least one (1) character long."]},
@@ -12,7 +13,8 @@ const EntrySchema = mongoose.Schema({
         "Books",
         "Movies",
         "Music",
-    ]}
+    ]},
+    addedBy:{type:String}
 },{timestamps:true, strict:false});
 
 const Entry = mongoose.model("Entry", EntrySchema);

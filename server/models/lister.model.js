@@ -9,24 +9,18 @@ const ListerSchema = mongoose.Schema({
     },
     email:{
         type:String,
-        required:[true, "You must enter an email!"]
+        required:[true, "You must enter an email!"],
+        minLength:[8, "Email must be at least eight (8) characters."]
     },
     password:{
         type: String,
-        required: [true, "Password is required!"]
-    }
+        required: [true, "Password is required!"],
+        minLength: [5, "Password must be at least five (5) characters."]
+    },
+    consumed: {type:String},
+    doNotWant: {type:String},
+    friends: {type:String},
 },{timestamps:true});
-
-ListerSchema.virtual("confirmPassword")
-    .get( ()=>this._confirmPassword)
-    .set(value =>this._confirmPassword = value)
-
-ListerSchema.pre("validate", function(next) {
-    if (this.password !== this.confirmPassword){
-        this.invalidate("confirmPassword", "Password and Confirm Password must match")
-    }
-    next();
-});
 
 ListerSchema.pre("save", async function(next) {
     try{
@@ -40,4 +34,14 @@ ListerSchema.pre("save", async function(next) {
 
 });
 
+ListerSchema.virtual("confirmPassword")
+    .get( ()=>this._confirmPassword)
+    .set(value =>this._confirmPassword = value)
+
+ListerSchema.pre("validate", function(next) {
+    if (this.password !== this.confirmPassword){
+        this.invalidate("confirmPassword", "Password and Confirm Password must match")
+    }
+    next();
+});
 module.exports = mongoose.model("Lister", ListerSchema)

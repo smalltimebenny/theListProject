@@ -1,0 +1,8 @@
+log in/out button changing depending on status
+cut down on duplicates - ISBN, library of congress definition, ???
+make sure docs in consumed and blacklist don't show up on recs lists
+friends
+recs to/from friends
+specific lists of other sorts?
+messaging and/or feeds for some reason?
+more specific and different categories of lists

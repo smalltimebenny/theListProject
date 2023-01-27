@@ -1,4 +1,5 @@
 const Entry = require("../models/entry.model")
+const jwt = require("jsonwebtoken")
 
 module.exports = {
     createEntry:(req,res)=>{
@@ -19,7 +20,8 @@ module.exports = {
             res.status(400).json(err)})
     },
     updateEntry:(req,res)=>{
-        Entry.findOneAndUpdate({_id:req.params.id}, req.body, {runValidators:true})
+        console.log(req.body)
+        Entry.findByIdAndUpdate({_id:req.params.id}, req.body, {runValidators:true})
         .then(result=>res.json(result))
         .catch(err=>{
             console.log("Update Entry error.")
@@ -66,4 +68,20 @@ module.exports = {
             console.log("Find Music List error.")
             res.status(400).json(err)})
     },
+    findOneEntry:(req,res)=>{
+        Entry.findOne({_id:req.params._id})
+        .then(entry=> res.json(entry))
+        .catch(err=>{
+            console.log("Find one Entry error")
+            res.status(400).json(err)
+        })
+    },
+    findEntriesByLister: (req, res)=>{
+        Entry.find({listerAdded:req.params._id})
+            .then(entry=>res.json(entry))
+            .catch(err=>{
+                console.log("Find entries by Lister error")
+                res.status(400).json(err)
+            })
+    }
     }
